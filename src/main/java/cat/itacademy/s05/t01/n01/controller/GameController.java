@@ -53,7 +53,7 @@ public class GameController {
                     required = true,
                     example = "6784e92ceb16d60e2080a472")},
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
-                    description = "Enter the action to be performed (BET, HIT, STAND) and the bet amount (only if action = BET)",
+                    description = "Enter the action to be performed (BET, HIT, STAND, DOUBLE) and the bet amount (only if action = BET, will be ignored in other cases)",
                     content = @io.swagger.v3.oas.annotations.media.Content(
                             schema = @Schema(implementation = GameAction.class)
                     )
