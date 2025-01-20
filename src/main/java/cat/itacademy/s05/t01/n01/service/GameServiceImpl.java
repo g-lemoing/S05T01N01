@@ -79,12 +79,9 @@ public class GameServiceImpl implements GameService{
             case HIT -> {
                 return playHit(game);
             }
-//            case DOUBLE -> {
-//
-//            }
-//            case SECURE -> {
-//
-//            }
+            case DOUBLE -> {
+                return playDouble(game);
+            }
             case STAND -> {
                 return playStand(game);
             }
@@ -125,10 +122,28 @@ public class GameServiceImpl implements GameService{
             throw new IllegalArgumentException("You cannot stand at this moment.");
 
         log.info("Playing action STAND...");
+        dealCardsToBank(game);
+        return checkWinnerAndPrize(game);
+    }
+
+    Mono<Game> playDouble(Game game){
+        if(game.getGameStatus() != GameStatus.SECOND_ROUND) throw new IllegalArgumentException("You cannot double your bet at this moment.");
+
+        log.info("Playing action DOUBLE bet...");
+        game.givePlayerHand(1);
+        game.getGamePlayer().setBetAmount(game.getGamePlayer().getBetAmount());
+        dealCardsToBank(game);
+        return checkWinnerAndPrize(game);
+    }
+
+    private void dealCardsToBank(Game game){
         while (Game.getHandValue(game.getBankHand()) < 17) {
             log.info("Dealing card to the bank...");
             game.giveBankHand(1);
         }
+    }
+
+    private Mono<Game> checkWinnerAndPrize(Game game){
         log.info("Checking for the winner");
         GameStatus gameStatus = game.ckeckWinner();
         game.setGameStatus(gameStatus);
@@ -144,7 +159,6 @@ public class GameServiceImpl implements GameService{
         }
         return gameRepository.save(game);
     }
-
     private void logGameDetails(Game game){
         log.info("Game info --> {}", game.toString());
     }
