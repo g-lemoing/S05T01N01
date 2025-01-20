@@ -119,13 +119,15 @@ public class Game {
         return status;
     }
 
+    @JsonIgnore
     public double getplayerPrize(){
         int playerHandValue = getHandValue(this.getGamePlayer().getPlayerHand());
+        int playerCards = this.gamePlayer.getPlayerHand().size();
         int bankHandValue = getHandValue(this.getBankHand());
-        if (playerHandValue == 21){
-            return gamePlayer.getBetAmount() * 3 / 2;
+        if (playerHandValue == 21 && playerCards == 2){
+            return (double) gamePlayer.getBetAmount() * 3 / 2;
         }
-        else if (playerHandValue > bankHandValue){
+        else if (playerHandValue > bankHandValue || bankHandValue > 21){
             return gamePlayer.getBetAmount() * 2;
         }else {
             return gamePlayer.getBetAmount();
@@ -133,6 +135,7 @@ public class Game {
 
     }
 
+    @JsonIgnore
     public boolean isGameOver(){
         return gameStatus == GameStatus.DRAW || gameStatus == GameStatus.PLAYER_WINS
                 || gameStatus == GameStatus.BANK_WINS;
