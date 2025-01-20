@@ -64,11 +64,10 @@ Abrir el Swagger (http://localhost:8080/swagger-ui/webjars/swagger-ui/index.html
 - Canviar el nom d'un jugador: http://localhost:8080/player/{playerId}, on {playerId} és el seu identificador únic.
 - Obtenir el rànquing dels jugadors segons la seva puntuació decreixent: http://localhost:8080/ranking
 
-http://localhost:8080/fruita/getAll
 ## Contribucions:
 1. Crear un fork del repositorio: 
 2. Clonar el repositorio hacia el directorio local marcado por git bash
- git clone https://github.com/YOUR-USERNAME/S04T02N02
+ git clone https://github.com/YOUR-USERNAME/S05T01N01
 3. Crear una rama
 git branch BRANCH-NAME
 git checkout BRANCH-NAME
