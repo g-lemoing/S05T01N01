@@ -12,7 +12,7 @@ El GameController gestiona 4 endpoints:
 - Crear una nova partida de Blackjack: Mètode POST, endpoint /game/new, body conté el nom del jugador, retorna resposta 201 Created amb informació sobre la partida creada.
 - Obtenir els detalls d'una partida específica: Mètode GET, endpoint /game/{id} on id és l'id del joc, retorna resposta 200 OK amb informació detallada sobre la partida.
 - Eliminar una partida de Blackjack existent: Mètode DELETE, endpoint /game/{id}/delete on id és l'id del joc, retorna resposta 204 No Content si la partida s'elimina correctament.
-- Realitzar una jugada en una partida: Mètode POST, endpoint /game/{id}/play on id és l'id del joc, body conté un objecte amb l'acció a realitar (BET, HIT, SECURE, STAND, DOUBLE), i l'import de l'aposta (només es té en compte amb l'acció BET).
+- Realitzar una jugada en una partida: Mètode POST, endpoint /game/{id}/play on id és l'id del joc, body conté un objecte amb l'acció a realitar (BET, HIT, STAND, DOUBLE), i l'import de l'aposta (només es té en compte amb l'acció BET).
 
 ### Serveis
 Corresponents a aquests dos controladors, disposem de 2 serveis que a més, realitzen altres operacions:
