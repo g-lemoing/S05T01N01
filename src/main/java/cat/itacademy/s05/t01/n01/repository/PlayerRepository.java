@@ -8,6 +8,6 @@ import reactor.core.publisher.Mono;
 
 @Repository
 public interface PlayerRepository extends R2dbcRepository<Player, Integer> {
-    //@Query("SELECT * FROM players WHERE name = :name LIMIT 1")
-    Mono<Player> findPlayerByName(String name);
+    @Query("SELECT * FROM players WHERE name = :name LIMIT 1")
+    Mono<Player> findFirstByName(String name);
 }
