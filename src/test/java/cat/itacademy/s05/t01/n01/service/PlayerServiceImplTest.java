@@ -117,7 +117,7 @@ class PlayerServiceImplTest {
 //        String name = "Juan";
 //        Player checkedPlayer = new Player(1, name, 10);
 //
-//        when(playerRepository.findPlayerByName(ArgumentMatchers.anyString()))
+//        when(playerRepository.findFirstByName(ArgumentMatchers.anyString()))
 //                .thenReturn(Mono.just(checkedPlayer));
 //        StepVerifier.create(playerService.createNewPlayer("Juan"))
 //            .expectNextMatches(player -> player.getId() == player1.getId() &&
@@ -130,7 +130,7 @@ class PlayerServiceImplTest {
     void createNewPlayerWhenPlayerNotExistsTest() {
         String playerName = "Artur";
         Player player = new Player(playerName);
-        when(playerRepository.findPlayerByName(playerName)).thenReturn(Mono.empty());
+        when(playerRepository.findFirstByName(playerName)).thenReturn(Mono.empty());
         when(playerRepository.save(ArgumentMatchers.any(Player.class))).thenReturn(Mono.just(player));
 
         StepVerifier.create(playerService.createNewPlayer(playerName))
