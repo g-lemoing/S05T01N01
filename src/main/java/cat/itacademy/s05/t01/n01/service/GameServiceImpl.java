@@ -127,11 +127,13 @@ public class GameServiceImpl implements GameService{
     }
 
     Mono<Game> playDouble(Game game){
-        if(game.getGameStatus() != GameStatus.SECOND_ROUND) throw new IllegalArgumentException("You cannot double your bet at this moment.");
+        if(game.getGameStatus() != GameStatus.SECOND_ROUND
+                || game.getGameStatus() == GameStatus.SECOND_ROUND && game.getGamePlayer().getPlayerHand().size() > 2)
+            throw new IllegalArgumentException("You cannot double your bet at this moment.");
 
         log.info("Playing action DOUBLE bet...");
+        game.getGamePlayer().setBetAmount(game.getGamePlayer().getBetAmount() * 2);
         game.givePlayerHand(1);
-        game.getGamePlayer().setBetAmount(game.getGamePlayer().getBetAmount());
         dealCardsToBank(game);
         return checkWinnerAndPrize(game);
     }
